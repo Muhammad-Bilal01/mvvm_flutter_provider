@@ -12,9 +12,9 @@ class ApiResponse<T> {
 // Static Factory Constructors.
   ApiResponse.loading() : status = Status.LOADING;
 
-  ApiResponse.completed() : status = Status.COMPLETED;
+  ApiResponse.completed(this.data) : status = Status.COMPLETED;
 
-  ApiResponse.error() : status = Status.ERROR;
+  ApiResponse.error(this.message) : status = Status.ERROR;
 
 // Override the method
   @override
