@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/utils.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -11,11 +13,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Text("Login"),
-        ],
-      ),
-    );
+        body: Center(
+      child: InkWell(
+          onTap: () {
+            Utils.toastMsg("No Internet Connections");
+          },
+          child: Text("Show Message")),
+    ));
   }
 }
