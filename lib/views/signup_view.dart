@@ -89,7 +89,7 @@ class _SignupViewState extends State<SignupView> {
             ),
             RoundButton(
               title: AppString.signup,
-              loading: authProvider.isLoading,
+              loading: authProvider.isSignUpLoading,
               onPress: () {
                 if (_emailController.text.isEmpty) {
                   Utils.flushbarErrorMessage(context, "please Enter Email");
