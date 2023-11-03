@@ -5,7 +5,13 @@ import 'package:mvvm_flutter_provider/resources/constant/strings_contant.dart';
 class RoundButton extends StatelessWidget {
   final Function()? onPress;
   final String title;
-  const RoundButton({super.key, required this.onPress, required this.title});
+  final bool loading;
+  const RoundButton({
+    super.key,
+    required this.onPress,
+    required this.title,
+    this.loading = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +25,18 @@ class RoundButton extends StatelessWidget {
           color: AppColor.buttonColor,
         ),
         child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(
-              color: AppColor.whiteColorColor,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          child: loading
+              ? const CircularProgressIndicator(
+                  color: AppColor.whiteColorColor,
+                )
+              : Text(
+                  title,
+                  style: const TextStyle(
+                    color: AppColor.whiteColorColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
         ),
       ),
     );

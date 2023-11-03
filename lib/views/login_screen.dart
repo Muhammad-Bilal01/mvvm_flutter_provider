@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_provider/resources/constant/strings_contant.dart';
+import 'package:mvvm_flutter_provider/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../resources/components/round_button.dart';
 import '../utils/utils.dart';
@@ -23,6 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthViewModel>(context);
+
     double height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       appBar: AppBar(
@@ -69,10 +73,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 }),
             SizedBox(
-              height: height * 0.085,
+              height: height * 0.070,
             ),
             RoundButton(
               title: AppString.login,
+              loading: authProvider.isLoading,
               onPress: () {
                 if (_emailController.text.isEmpty) {
                   Utils.flushbarErrorMessage(context, "please Enter Email");
@@ -82,7 +87,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   Utils.flushbarErrorMessage(
                       context, "Password must be 6 characters long");
                 } else {
-                  Utils.toastMsg("Api Call");
+                  Map data = {
+                    'email': _emailController.text.toString(),
+                    'password': _passwordController.text.toString(),
+                  };
+                  authProvider.callLoginApi(context, data);
                 }
               },
             ),
