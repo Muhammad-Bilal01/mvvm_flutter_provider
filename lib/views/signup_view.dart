@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_flutter_provider/resources/constant/strings_contant.dart';
-import 'package:mvvm_flutter_provider/utils/routes/routes.dart';
-import 'package:mvvm_flutter_provider/utils/routes/routes_name.dart';
-import 'package:mvvm_flutter_provider/view_model/auth_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../resources/components/round_button.dart';
+import '../resources/constant/strings_contant.dart';
+import '../utils/routes/routes_name.dart';
 import '../utils/utils.dart';
+import '../view_model/auth_view_model.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupView extends StatefulWidget {
+  const SignupView({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupView> createState() => _SignupViewState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupViewState extends State<SignupView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -43,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     double height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppString.login),
+        title: const Text(AppString.signup),
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
@@ -89,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               height: height * 0.070,
             ),
             RoundButton(
-              title: AppString.login,
+              title: AppString.signup,
               loading: authProvider.isLoading,
               onPress: () {
                 if (_emailController.text.isEmpty) {
@@ -104,16 +103,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     'email': _emailController.text.toString(),
                     'password': _passwordController.text.toString(),
                   };
-                  authProvider.callLoginApi(context, data);
+                  authProvider.callSignupApi(context, data);
                 }
               },
             ),
             InkWell(
               onTap: () {
-                Navigator.pushReplacementNamed(
-                    context, RoutesName.signupScreen);
+                Navigator.pushReplacementNamed(context, RoutesName.loginScreen);
               },
-              child: const Text("Don't have an account? Signup"),
+              child: const Text("Already have an account? login"),
             ),
           ],
         ),
